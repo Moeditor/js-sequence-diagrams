@@ -1,6 +1,6 @@
 {
   "name": "js-sequence-diagrams",
-  "version": "1000.0.6",
+  "version": "10000.0.6",
   "main": "fucknpm/sequence-diagram-min.js",
   "repository": {
     "type": "git",
