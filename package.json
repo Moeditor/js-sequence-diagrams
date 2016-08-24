@@ -1,10 +1,10 @@
 {
   "name": "js-sequence-diagrams",
-  "version": "10000.0.6",
+  "version": "100000.0.6",
   "main": "fucknpm/sequence-diagram-min.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bramp/js-sequence-diagrams.git"
+    "url": "https://github.com/Moeditor/js-sequence-diagrams.git"
   },
   "license": "BSD-2-Clause",
   "dependencies": {
