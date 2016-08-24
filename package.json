@@ -1,6 +1,7 @@
 {
   "name": "js-sequence-diagrams",
-  "version": "100000.0.6",
+  "version": "1000000.0.6",
+  "description": "Fucks NPM and draws simple SVG sequence diagrams from textual representation of the diagram",
   "main": "fucknpm/sequence-diagram-min.js",
   "repository": {
     "type": "git",
