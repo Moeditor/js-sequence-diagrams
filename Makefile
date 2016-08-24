@@ -3,7 +3,7 @@
 NODE_MODULES := node_modules/.bin
 BOWER_COMPONENTS := bower_components
 
-all: node_modules lint build/sequence-diagram-min.js test
+all: node_modules lint fucknpm/sequence-diagram-min.js test
 
 node_modules: package.json
 	#
@@ -22,7 +22,7 @@ bower_components: bower.json
 dependencies: node_modules bower_components
 
 clean:
-	-rm build/*
+	-rm fucknpm/*
 
 veryclean: clean
 	-rm -rf node_modules
@@ -34,33 +34,33 @@ lint: dependencies package.json bower.json
 	$(NODE_MODULES)/jsonlint package.json -q
 	$(NODE_MODULES)/jsonlint bower.json -q
 
-test: dependencies build/sequence-diagram-min.js
+test: dependencies fucknpm/sequence-diagram-min.js
 
 	# Test the un-minifed file (with underscore)
 	$(NODE_MODULES)/qunit \
-		-c build/sequence-diagram.js \
+		-c fucknpm/sequence-diagram.js \
 		-t test/*-tests.js \
 		-d test/raphael-mock.js $(BOWER_COMPONENTS)/underscore/underscore-min.js
 
 	# Test the un-minifed file (with lodash)
 	$(NODE_MODULES)/qunit \
-		-c build/sequence-diagram.js \
+		-c fucknpm/sequence-diagram.js \
 		-t test/*-tests.js \
 		-d test/raphael-mock.js $(BOWER_COMPONENTS)/lodash/dist/lodash.min.js
 
 	# Test the minifed file (with underscore)
 	$(NODE_MODULES)/qunit \
-		-c build/sequence-diagram-min.js \
+		-c fucknpm/sequence-diagram-min.js \
 		-t test/*-tests.js \
 		-d test/raphael-mock.js $(BOWER_COMPONENTS)/underscore/underscore-min.js
 
 	# Test the minifed file (with lodash)
 	$(NODE_MODULES)/qunit \
-		-c build/sequence-diagram-min.js \
+		-c fucknpm/sequence-diagram-min.js \
 		-t test/*-tests.js \
 		-d test/raphael-mock.js $(BOWER_COMPONENTS)/lodash/dist/lodash.min.js
 
-build/grammar.js: src/grammar.jison
+fucknpm/grammar.js: src/grammar.jison
 	$(NODE_MODULES)/jison $< -o $@.tmp
 
 	# After building the grammar, run it through the uglifyjs to fix some non-strict issues.
@@ -69,30 +69,30 @@ build/grammar.js: src/grammar.jison
 		$@.tmp -o $@ \
 		--comments all --compress --beautify
 
-build/diagram-grammar.js: src/diagram.js build/grammar.js
+fucknpm/diagram-grammar.js: src/diagram.js fucknpm/grammar.js
 	#
 	# Compiling grammar
 	#
 	$(NODE_MODULES)/preprocess $< . > $@
 
-build/sequence-diagram.js: src/main.js build/diagram-grammar.js src/jquery-plugin.js fonts/daniel/daniel_700.font.js src/sequence-diagram.js
+fucknpm/sequence-diagram.js: src/main.js fucknpm/diagram-grammar.js src/jquery-plugin.js fonts/daniel/daniel_700.font.js src/sequence-diagram.js
 	#
 	# Finally combine all javascript files together
 	#
 	$(NODE_MODULES)/preprocess $< . > $@
 
-build/sequence-diagram-min.js build/sequence-diagram-min.js.map: build/sequence-diagram.js
+fucknpm/sequence-diagram-min.js fucknpm/sequence-diagram-min.js.map: fucknpm/sequence-diagram.js
 	#
 	# Please ignore the warnings below (these are in combined js code)
 	#
 	$(NODE_MODULES)/uglifyjs \
-		build/sequence-diagram.js \
-		-o build/sequence-diagram-min.js \
+		fucknpm/sequence-diagram.js \
+		-o fucknpm/sequence-diagram-min.js \
 		--compress --comments --lint \
-		--source-map build/sequence-diagram-min.js.map \
+		--source-map fucknpm/sequence-diagram-min.js.map \
 		--source-map-url sequence-diagram-min.js.map
 
 	#
 	# Copy minified file to site
 	#
-	cp build/sequence-diagram-min.js* _site/
+	cp fucknpm/sequence-diagram-min.js* _site/
