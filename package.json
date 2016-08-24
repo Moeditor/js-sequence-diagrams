@@ -1,10 +1,16 @@
 {
   "name": "js-sequence-diagrams",
+  "version": "1.0.6",
+  "main": "build/sequence-diagram-min.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/bramp/js-sequence-diagrams.git"
   },
   "license": "BSD-2-Clause",
+  "dependencies": {
+    "underscore": "~1.4.x",
+    "raphael": "~2.1.x"
+  },
   "devDependencies": {
     "jison": "0.4.15",
     "jshint": "2.7.x",
